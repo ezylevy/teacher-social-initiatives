@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>מיזמי מורים לאחריות חברתית | רמת השרון</title>
+    <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --primary-dark: #1d4ed8;
+            --secondary: #7c3aed;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gradient-1: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --gradient-2: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --gradient-3: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+            --gradient-4: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Heebo', sans-serif;
+            background: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: var(--gradient-1);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+            opacity: 0.5;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            color: white;
+            font-size: 0.9rem;
+            margin-bottom: 2rem;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
+            color: white;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 4px 20px rgba(0,0,0,0.2);
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            color: rgba(255,255,255,0.9);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: white;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 800;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
+            40% { transform: translateX(-50%) translateY(-10px); }
+            60% { transform: translateX(-50%) translateY(-5px); }
+        }
+
+        .scroll-indicator svg {
+            width: 30px;
+            height: 30px;
+            fill: white;
+        }
+
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 2rem;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            transform: translateY(-100%);
+            transition: transform 0.3s ease;
+        }
+
+        .nav.visible {
+            transform: translateY(0);
+        }
+
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-logo {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: var(--primary);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        /* Section Styles */
+        section {
+            padding: 5rem 2rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-header p {
+            font-size: 1.1rem;
+            color: #64748b;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Charter Section */
+        .charter-section {
+            background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
+        }
+
+        .charter-content {
+            max-width: 900px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+        }
+
+        .charter-list {
+            list-style: none;
+        }
+
+        .charter-list li {
+            padding: 1rem 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+
+        .charter-list li:last-child {
+            border-bottom: none;
+        }
+
+        .charter-icon {
+            width: 30px;
+            height: 30px;
+            background: var(--success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        .charter-icon svg {
+            width: 16px;
+            height: 16px;
+            fill: white;
+        }
+
+        /* Projects Grid */
+        .projects-section {
+            background: #f1f5f9;
+        }
+
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .project-card {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.08);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            cursor: pointer;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .project-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .project-content {
+            padding: 1.5rem;
+        }
+
+        .project-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .project-subtitle {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tag {
+            background: #e0e7ff;
+            color: #4338ca;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+        }
+
+        .view-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--gradient-1);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            width: 100%;
+            justify-content: center;
+        }
+
+        .view-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(5px);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal {
+            background: white;
+            border-radius: 20px;
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            position: relative;
+            transform: scale(0.9) translateY(20px);
+            transition: all 0.3s ease;
+        }
+
+        .modal-overlay.active .modal {
+            transform: scale(1) translateY(0);
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.1);
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+            z-index: 10;
+        }
+
+        .modal-close:hover {
+            background: rgba(0,0,0,0.2);
+        }
+
+        .modal-header {
+            padding: 2rem;
+            background: var(--gradient-1);
+            color: white;
+        }
+
+        .modal-header h2 {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-header p {
+            opacity: 0.9;
+        }
+
+        .modal-body {
+            padding: 2rem;
+        }
+
+        .info-section {
+            margin-bottom: 2rem;
+        }
+
+        .info-section h3 {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid;
+        }
+
+        .info-section.benefits h3 {
+            color: var(--success);
+            border-color: var(--success);
+        }
+
+        .info-section.challenges h3 {
+            color: var(--warning);
+            border-color: var(--warning);
+        }
+
+        .info-section.recommendations h3 {
+            color: var(--primary);
+            border-color: var(--primary);
+        }
+
+        .info-section ul {
+            list-style: none;
+        }
+
+        .info-section li {
+            padding: 0.75rem 0;
+            padding-right: 1.5rem;
+            position: relative;
+        }
+
+        .info-section li::before {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: 1.1rem;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+        }
+
+        .info-section.benefits li::before {
+            background: var(--success);
+        }
+
+        .info-section.challenges li::before {
+            background: var(--warning);
+        }
+
+        .info-section.recommendations li::before {
+            background: var(--primary);
+        }
+
+        .modal-files {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .modal-files h4 {
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .file-link {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem;
+            background: white;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            transition: all 0.3s;
+            border: 1px solid #e2e8f0;
+        }
+
+        .file-link:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .file-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .file-icon.pdf { background: #fee2e2; color: #dc2626; }
+        .file-icon.pptx { background: #fef3c7; color: #d97706; }
+        .file-icon.docx { background: #dbeafe; color: #2563eb; }
+        .file-icon.video { background: #dcfce7; color: #16a34a; }
+        .file-icon.image { background: #f3e8ff; color: #9333ea; }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        footer p {
+            opacity: 0.7;
+            margin-bottom: 1rem;
+        }
+
+        footer .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-in {
+            animation: fadeInUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-stats {
+                gap: 1.5rem;
+            }
+
+            .stat-number {
+                font-size: 2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .modal {
+                margin: 1rem;
+            }
+        }
+
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: var(--primary);
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--primary-dark);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="navbar">
+        <div class="nav-content">
+            <div class="nav-logo">מיזמי מורים | רמת השרון</div>
+            <ul class="nav-links">
+                <li><a href="#charter">האמנה</a></li>
+                <li><a href="#projects">המיזמים</a></li>
+                <li><a href="#about">אודות</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-badge">יוני 2024 | דמו-דיי רמת השרון</div>
+            <h1>מיזמי מורים לאחריות חברתית</h1>
+            <p>סמינר יוזמות מורים לפרויקטים חברתיים - יצירת שינוי חברתי למען חברה טובה יותר</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">8</span>
+                    <span class="stat-label">מיזמים חברתיים</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">AI</span>
+                    <span class="stat-label">כלים טכנולוגיים</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">מחויבות חינוכית</span>
+                </div>
+            </div>
+        </div>
+        <div class="scroll-indicator">
+            <svg viewBox="0 0 24 24"><path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/></svg>
+        </div>
+    </section>
+
+    <!-- Charter Section -->
+    <section class="charter-section" id="charter">
+        <div class="section-header">
+            <h2>אמנה עירונית לאחריות חברתית</h2>
+            <p>המצפן העירוני לקידום אחריות חברתית ברמת השרון</p>
+        </div>
+        <div class="charter-content">
+            <ul class="charter-list">
+                <li>
+                    <div class="charter-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                    <span>ביחד ניצור שינוי חברתי ונהיה קהילה סובלנית ומכבדת</span>
+                </li>
+                <li>
+                    <div class="charter-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                    <span>ניקח אחריות על המילים והמעשים שלנו - נאמץ שפה חיובית וגישה ונפעל בשיקול דעת כלפי האחר</span>
+                </li>
+                <li>
+                    <div class="charter-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                    <span>נכבד את הייחודיות ואת השונה מאיתנו ונהג בהתחשבות במטרה לקרב ולקדם תחושת מוגנות</span>
+                </li>
+                <li>
+                    <div class="charter-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                    <span>נאיר את נקודות האור - נעודד את ילדינו וסביבתנו לראות את הטוב שמסביבנו</span>
+                </li>
+                <li>
+                    <div class="charter-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                    <span>חרם? לא בקבוצה שלנו! כקהילה יש לנו כוח להעצים ולחבר</span>
+                </li>
+                <li>
+                    <div class="charter-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                    <span>לא ניתן יד לחרמות ולהדרה חברתית</span>
+                </li>
+                <li>
+                    <div class="charter-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                    <span>לא נעמוד מהצד! נפעל במחויבות להתריע ולמנוע מצבי פגיעה</span>
+                </li>
+                <li>
+                    <div class="charter-icon"><svg viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/></svg></div>
+                    <span>נחזק את השקיפות והאמון בין הגורמים השונים בעיר ובקהילה</span>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section class="projects-section" id="projects">
+        <div class="section-header">
+            <h2>המיזמים שלנו</h2>
+            <p>לחצו על כל מיזם לצפייה בפרטים מלאים, יתרונות, אתגרים והמלצות</p>
+        </div>
+        <div class="projects-grid">
+
+            <!-- Project 1: כל בחירה עושה הבדל -->
+            <div class="project-card" onclick="openModal('project1')">
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <img src="מצגות דמו דיי רמת השרון/Take a look at my Canva design!.png" alt="הבריכה" onerror="this.style.display='none'">
+                    <div class="project-badge">AI + חינוך</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">כל בחירה עושה הבדל</h3>
+                    <p class="project-subtitle">מיזם דיגיטלי מתמשך לשיפור האקלים הכיתתי בכיתות ה'-ו'</p>
+                    <div class="project-tags">
+                        <span class="tag">סרטונים</span>
+                        <span class="tag">קומיקס</span>
+                        <span class="tag">חדר בריחה</span>
+                        <span class="tag">AI</span>
+                    </div>
+                    <button class="view-btn">צפייה בפרטים</button>
+                </div>
+            </div>
+
+            <!-- Project 2: SafeFlow -->
+            <div class="project-card" onclick="openModal('project2')">
+                <div class="project-image" style="background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);">
+                    <img src="מצגות דמו דיי רמת השרון/SafeFlow.jpg" alt="SafeFlow">
+                    <div class="project-badge">אפליקציה</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">SafeFlow</h3>
+                    <p class="project-subtitle">כי במוגנות אין מקום לניחושים - מערכת AI לדיווח ותגובה מהירה</p>
+                    <div class="project-tags">
+                        <span class="tag">AI אחראי</span>
+                        <span class="tag">מוגנות</span>
+                        <span class="tag">דיווח חכם</span>
+                    </div>
+                    <button class="view-btn">צפייה בפרטים</button>
+                </div>
+            </div>
+
+            <!-- Project 3: הבריכה -->
+            <div class="project-card" onclick="openModal('project3')">
+                <div class="project-image" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                    <img src="מצגות דמו דיי רמת השרון/Take a look at my Canva design!.png" alt="הבריכה">
+                    <div class="project-badge">ODT + AI</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">הבריכה</h3>
+                    <p class="project-subtitle">קופצים למים של מיומנויות חברתיות - שילוב ODT עם ליווי AI</p>
+                    <div class="project-tags">
+                        <span class="tag">מיומנויות חברתיות</span>
+                        <span class="tag">SEL</span>
+                        <span class="tag">בינה מלאכותית</span>
+                    </div>
+                    <button class="view-btn">צפייה בפרטים</button>
+                </div>
+            </div>
+
+            <!-- Project 4: מילה טובה -->
+            <div class="project-card" onclick="openModal('project4')">
+                <div class="project-image" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                    <img src="מצגות דמו דיי רמת השרון/מילה טובה מרימה כיתה (וקהילה) שלמה.png" alt="מילה טובה">
+                    <div class="project-badge">שפה חיובית</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">מילה טובה מרימה כיתה</h3>
+                    <p class="project-subtitle">יצירת שפה אחידה ושיתוף הקהילה בתקשורת חיובית</p>
+                    <div class="project-tags">
+                        <span class="tag">תקשורת</span>
+                        <span class="tag">קהילה</span>
+                        <span class="tag">שפה אחידה</span>
+                    </div>
+                    <button class="view-btn">צפייה בפרטים</button>
+                </div>
+            </div>
+
+            <!-- Project 5: RealTalk -->
+            <div class="project-card" onclick="openModal('project5')">
+                <div class="project-image" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                    <div class="project-badge">שיח אמיתי</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">RealTalk</h3>
+                    <p class="project-subtitle">פלטפורמה לשיח אמיתי ופתוח בין תלמידים</p>
+                    <div class="project-tags">
+                        <span class="tag">דיאלוג</span>
+                        <span class="tag">הקשבה</span>
+                        <span class="tag">אמפתיה</span>
+                    </div>
+                    <button class="view-btn">צפייה בפרטים</button>
+                </div>
+            </div>
+
+            <!-- Project 6: GOOD VIBES -->
+            <div class="project-card" onclick="openModal('project6')">
+                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <div class="project-badge">אנרגיה חיובית</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">GOOD VIBES</h3>
+                    <p class="project-subtitle">יצירת אווירה חיובית ותומכת בכיתה ובבית הספר</p>
+                    <div class="project-tags">
+                        <span class="tag">אווירה</span>
+                        <span class="tag">חיוביות</span>
+                        <span class="tag">תמיכה</span>
+                    </div>
+                    <button class="view-btn">צפייה בפרטים</button>
+                </div>
+            </div>
+
+            <!-- Project 7: קופסת הרגשות שלי -->
+            <div class="project-card" onclick="openModal('project7')">
+                <div class="project-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                    <div class="project-badge">רגשות</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">קופסת הרגשות שלי</h3>
+                    <p class="project-subtitle">כלי לזיהוי, הבעה וניהול רגשות בקרב ילדים</p>
+                    <div class="project-tags">
+                        <span class="tag">אוריינות רגשית</span>
+                        <span class="tag">ויסות עצמי</span>
+                        <span class="tag">מודעות</span>
+                    </div>
+                    <button class="view-btn">צפייה בפרטים</button>
+                </div>
+            </div>
+
+            <!-- Project 8: דחייה חברתית -->
+            <div class="project-card" onclick="openModal('project8')">
+                <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <div class="project-badge">סרטון</div>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">דחייה חברתית - הדר, רעות ורוני</h3>
+                    <p class="project-subtitle">סרטונים על התמודדות עם דחייה חברתית ופתרונות</p>
+                    <div class="project-tags">
+                        <span class="tag">סרטון</span>
+                        <span class="tag">דחייה חברתית</span>
+                        <span class="tag">פתרונות</span>
+                    </div>
+                    <button class="view-btn">צפייה בפרטים</button>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="about">
+        <div class="footer-logo">מיזמי מורים לאחריות חברתית</div>
+        <p>רמת השרון | יוני 2024</p>
+        <p>אמנה עירונית לאחריות חברתית - ניצור יחד שינוי חברתי למען חברה טובה יותר</p>
+    </footer>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="project1-modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('project1')">✕</button>
+            <div class="modal-header" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                <h2>כל בחירה עושה הבדל</h2>
+                <p>מיזם דיגיטלי מתמשך לשיפור האקלים הכיתתי בכיתות ה'-ו'</p>
+            </div>
+            <div class="modal-body">
+                <div class="info-section benefits">
+                    <h3><span>✓</span> יתרונות המיזם</h3>
+                    <ul>
+                        <li>משתלב בשיעור חינוך ללא שינוי מערכת - 2-10 דקות בשבוע</li>
+                        <li>לא דורש הכשרת מורים - פותחים מצגת ולוחצים PLAY</li>
+                        <li>תוצרים מוכנים מראש: סרטון, קומיקס, משחק חדר בריחה</li>
+                        <li>מתאים לכל שנה ולכל כיתה - מיזם מחזורי</li>
+                        <li>מפתח מודעות, בחירה ואחריות חברתית לאורך זמן</li>
+                        <li>AI מאפשר יצירת תוצרים באיכות גבוהה ובמהירות</li>
+                    </ul>
+                </div>
+                <div class="info-section challenges">
+                    <h3><span>!</span> אתגרים</h3>
+                    <ul>
+                        <li>תלות בטכנולוגיה - דורש גישה לאינטרנט ומחשב/מקרן</li>
+                        <li>צורך בעדכון תכנים שוטף לשמירה על רלוונטיות</li>
+                        <li>קושי במדידת השפעה ארוכת טווח על התנהגות</li>
+                        <li>שונות ברמת המעורבות של מורים שונים</li>
+                    </ul>
+                </div>
+                <div class="info-section recommendations">
+                    <h3><span>→</span> המלצות לשיפור</h3>
+                    <ul>
+                        <li>הוספת מנגנון משוב מתלמידים לאחר כל פעילות</li>
+                        <li>יצירת גרסה אופליין לבתי ספר עם קישוריות מוגבלת</li>
+                        <li>פיתוח מדריך למורה עם שאלות מנחות לדיון</li>
+                        <li>שילוב הורים באמצעות פעילויות משלימות לבית</li>
+                        <li>הוספת דשבורד למעקב אחר התקדמות הכיתה</li>
+                    </ul>
+                </div>
+                <div class="modal-files">
+                    <h4>קבצי המיזם</h4>
+                    <a href="מצגות דמו דיי רמת השרון/Copy of כל בחירה עושה הבדל.pdf" class="file-link" target="_blank">
+                        <div class="file-icon pdf">PDF</div>
+                        <span>מצגת המיזם המלאה</span>
+                    </a>
+                    <a href="מצגות דמו דיי רמת השרון/כל בחירה עושה הבדל.pptx" class="file-link" target="_blank">
+                        <div class="file-icon pptx">PPT</div>
+                        <span>מצגת PowerPoint</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="project2-modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('project2')">✕</button>
+            <div class="modal-header" style="background: linear-gradient(135deg, #0f0c29 0%, #302b63 50%, #24243e 100%);">
+                <h2>SafeFlow</h2>
+                <p>כי במוגנות אין מקום לניחושים</p>
+            </div>
+            <div class="modal-body">
+                <div class="info-section benefits">
+                    <h3><span>✓</span> יתרונות המיזם</h3>
+                    <ul>
+                        <li>מונחה נהלי שפ"י ומשרד החינוך - מבוסס AI אחראי ומאובטח</li>
+                        <li>למורים: ממיר אירוע מורכב לתוכנית עבודה ברורה ומנומקת תוך 30 שניות</li>
+                        <li>לתלמידים: מדריך אישי שנותן כלים לקחת אחריות ולפנות לעזרה</li>
+                        <li>דיווח אנונימי וחכם שמעודד פנייה למבוגר אחראי</li>
+                        <li>המערכת היחידה המבוססת על נהלי שפ"י רשמיים ודאטה מאומתת</li>
+                    </ul>
+                </div>
+                <div class="info-section challenges">
+                    <h3><span>!</span> אתגרים</h3>
+                    <ul>
+                        <li>דרישות פרטיות ואבטחת מידע מחמירות</li>
+                        <li>צורך באינטגרציה עם מערכות קיימות בבתי ספר</li>
+                        <li>התנגדות פוטנציאלית לשימוש ב-AI בנושאים רגישים</li>
+                        <li>אתגר בהבטחת אנונימיות אמיתית תוך מעקב אחר מקרים</li>
+                    </ul>
+                </div>
+                <div class="info-section recommendations">
+                    <h3><span>→</span> המלצות לשיפור</h3>
+                    <ul>
+                        <li>הוספת ערוץ תקשורת ישיר עם פסיכולוג חינוכי</li>
+                        <li>פיתוח גרסה מותאמת להורים עם התראות רלוונטיות</li>
+                        <li>יצירת דוחות תקופתיים אנונימיים לזיהוי מגמות בית ספריות</li>
+                        <li>הוספת משאבי תמיכה ראשונית לתלמיד המדווח</li>
+                        <li>אינטגרציה עם אפליקציות בריאות נפשית קיימות</li>
+                    </ul>
+                </div>
+                <div class="modal-files">
+                    <h4>קבצי המיזם</h4>
+                    <a href="מצגות דמו דיי רמת השרון/SafeFlow.jpg" class="file-link" target="_blank">
+                        <div class="file-icon image">IMG</div>
+                        <span>תמונת המיזם</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="project3-modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('project3')">✕</button>
+            <div class="modal-header" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                <h2>הבריכה</h2>
+                <p>קופצים למים של מיומנויות חברתיות</p>
+            </div>
+            <div class="modal-body">
+                <div class="info-section benefits">
+                    <h3><span>✓</span> יתרונות המיזם</h3>
+                    <ul>
+                        <li>שילוב חדשני של ODT (תרפיה דרך עשייה) עם ליווי AI אישי</li>
+                        <li>פעילות חוויתית + ליווי AI אישי ב-90 דקות</li>
+                        <li>מטרה: אקלים בית ספרי חיובי בזמן קצר</li>
+                        <li>תוצאות מוכחות: ירידה של 20-30% בהתנהגויות אלימות</li>
+                        <li>מפתח 4 צירי SEL: זיהוי רגשות, קשרים, תקשורת ועבודה עצמית</li>
+                        <li>מותאם לכל גיל ורמה</li>
+                    </ul>
+                </div>
+                <div class="info-section challenges">
+                    <h3><span>!</span> אתגרים</h3>
+                    <ul>
+                        <li>דורש תשתית מתאימה (בריכה או מתקן דומה)</li>
+                        <li>עלות גבוהה יחסית להפעלה</li>
+                        <li>דורש הכשרת צוות מקצועי</li>
+                        <li>מוגבל בכמות המשתתפים בכל פעילות</li>
+                    </ul>
+                </div>
+                <div class="info-section recommendations">
+                    <h3><span>→</span> המלצות לשיפור</h3>
+                    <ul>
+                        <li>פיתוח גרסה "יבשתית" לבתי ספר ללא בריכה</li>
+                        <li>יצירת מדריך וידאו להכשרת מורים</li>
+                        <li>הוספת אפליקציה נלווית למעקב אחר התקדמות אישית</li>
+                        <li>שיתוף פעולה עם מרכזי ספורט עירוניים</li>
+                        <li>פיתוח תוכנית המשך לתרגול בכיתה</li>
+                    </ul>
+                </div>
+                <div class="modal-files">
+                    <h4>קבצי המיזם</h4>
+                    <a href="מצגות דמו דיי רמת השרון/הבריכה.pdf" class="file-link" target="_blank">
+                        <div class="file-icon pdf">PDF</div>
+                        <span>מצגת הבריכה (קובץ גדול)</span>
+                    </a>
+                    <a href="מצגות דמו דיי רמת השרון/Take a look at my Canva design!.png" class="file-link" target="_blank">
+                        <div class="file-icon image">IMG</div>
+                        <span>אינפוגרפיקה</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="project4-modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('project4')">✕</button>
+            <div class="modal-header" style="background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+                <h2>מילה טובה מרימה כיתה (וקהילה) שלמה</h2>
+                <p>יצירת שפה אחידה ושיתוף הקהילה</p>
+            </div>
+            <div class="modal-body">
+                <div class="info-section benefits">
+                    <h3><span>✓</span> יתרונות המיזם</h3>
+                    <ul>
+                        <li>פשוט ליישום - יצירת שפה אחידה בין כיתה, הפסקה ובית</li>
+                        <li>מכוון להורים, מורים ותלמידים יחד</li>
+                        <li>תוצרים מוכנים, ברורים ומותאמים לגיל</li>
+                        <li>משפר את השיח במקום להחליש אותו</li>
+                        <li>עלות נמוכה ליישום מיידי</li>
+                    </ul>
+                </div>
+                <div class="info-section challenges">
+                    <h3><span>!</span> אתגרים</h3>
+                    <ul>
+                        <li>ילדים משתמשים לעיתים במילים שמצמצמות בלי להבין את ההשפעה</li>
+                        <li>אין שפה אחידה בין כיתה, הפסקה ובית</li>
+                        <li>למורים חסרים תוצרים מוכנים, ברורים ומותאמים לגיל</li>
+                        <li>דורש עקביות ארוכת טווח מכל המעורבים</li>
+                    </ul>
+                </div>
+                <div class="info-section recommendations">
+                    <h3><span>→</span> המלצות לשיפור</h3>
+                    <ul>
+                        <li>יצירת "מילון משותף" דיגיטלי לכל בית ספר</li>
+                        <li>הוספת משחקים אינטראקטיביים לתרגול המילים</li>
+                        <li>פיתוח אפליקציה להורים עם טיפים יומיים</li>
+                        <li>יצירת תעודות הוקרה לתלמידים שמשתמשים בשפה חיובית</li>
+                        <li>שילוב בפינת כיתה עם "מילה טובה של השבוע"</li>
+                    </ul>
+                </div>
+                <div class="modal-files">
+                    <h4>קבצי המיזם</h4>
+                    <a href="מצגות דמו דיי רמת השרון/מילה טובה מרימה כיתה (וקהילה) שלמה.png" class="file-link" target="_blank">
+                        <div class="file-icon image">IMG</div>
+                        <span>תמונת המיזם</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="project5-modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('project5')">✕</button>
+            <div class="modal-header" style="background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);">
+                <h2>RealTalk</h2>
+                <p>פלטפורמה לשיח אמיתי ופתוח</p>
+            </div>
+            <div class="modal-body">
+                <div class="info-section benefits">
+                    <h3><span>✓</span> יתרונות המיזם</h3>
+                    <ul>
+                        <li>מעודד שיח פתוח וכנה בין תלמידים</li>
+                        <li>מפתח מיומנויות הקשבה אקטיבית</li>
+                        <li>בונה אמפתיה והבנה הדדית</li>
+                        <li>יוצר מרחב בטוח לשיתוף</li>
+                        <li>מחזק קשרים חברתיים בכיתה</li>
+                    </ul>
+                </div>
+                <div class="info-section challenges">
+                    <h3><span>!</span> אתגרים</h3>
+                    <ul>
+                        <li>דורש אמון ובטיחות פסיכולוגית</li>
+                        <li>קושי בשמירה על גבולות בשיחות רגישות</li>
+                        <li>לא כל תלמיד מוכן לשתף</li>
+                        <li>דורש הנחיה מקצועית</li>
+                    </ul>
+                </div>
+                <div class="info-section recommendations">
+                    <h3><span>→</span> המלצות לשיפור</h3>
+                    <ul>
+                        <li>הוספת כרטיסיות נושאים מובנות להנחיית השיחה</li>
+                        <li>פיתוח גרסה דיגיטלית לשיחות אנונימיות</li>
+                        <li>יצירת מדריך הנחיה למורים עם תרחישים שכיחים</li>
+                        <li>הוספת משחקי חימום לפני כל שיחה</li>
+                        <li>שילוב הורים בשיחות משפחתיות מקבילות</li>
+                    </ul>
+                </div>
+                <div class="modal-files">
+                    <h4>קבצי המיזם</h4>
+                    <a href="מצגות דמו דיי רמת השרון/RealTalk.pptx" class="file-link" target="_blank">
+                        <div class="file-icon pptx">PPT</div>
+                        <span>מצגת RealTalk</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="project6-modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('project6')">✕</button>
+            <div class="modal-header" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                <h2>GOOD VIBES</h2>
+                <p>יצירת אווירה חיובית ותומכת</p>
+            </div>
+            <div class="modal-body">
+                <div class="info-section benefits">
+                    <h3><span>✓</span> יתרונות המיזם</h3>
+                    <ul>
+                        <li>משפר את האווירה הכללית בכיתה ובבית הספר</li>
+                        <li>מעודד חשיבה חיובית ואופטימיות</li>
+                        <li>מחזק תחושת שייכות וקבלה</li>
+                        <li>פשוט ליישום יומיומי</li>
+                        <li>משפיע על רווחה נפשית של תלמידים ומורים</li>
+                    </ul>
+                </div>
+                <div class="info-section challenges">
+                    <h3><span>!</span> אתגרים</h3>
+                    <ul>
+                        <li>קושי בשמירה על עקביות לאורך זמן</li>
+                        <li>"חיוביות רעילה" - התעלמות מרגשות שליליים לגיטימיים</li>
+                        <li>שונות תרבותית בהבעת חיוביות</li>
+                        <li>מדידת השפעה מאתגרת</li>
+                    </ul>
+                </div>
+                <div class="info-section recommendations">
+                    <h3><span>→</span> המלצות לשיפור</h3>
+                    <ul>
+                        <li>איזון בין חיוביות לבין הכרה ברגשות קשים</li>
+                        <li>יצירת "לוח ויברציות" דיגיטלי לכיתה</li>
+                        <li>פיתוח טקסים יומיים קצרים (בוקר טוב, סיכום יום)</li>
+                        <li>הוספת פעילויות הכרת תודה שבועיות</li>
+                        <li>שילוב מוזיקה ואמנות ביצירת האווירה</li>
+                    </ul>
+                </div>
+                <div class="modal-files">
+                    <h4>קבצי המיזם</h4>
+                    <a href="מצגות דמו דיי רמת השרון/GOOD VIBES.docx" class="file-link" target="_blank">
+                        <div class="file-icon docx">DOC</div>
+                        <span>מסמך GOOD VIBES</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="project7-modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('project7')">✕</button>
+            <div class="modal-header" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                <h2>קופסת הרגשות שלי</h2>
+                <p>כלי לזיהוי, הבעה וניהול רגשות</p>
+            </div>
+            <div class="modal-body">
+                <div class="info-section benefits">
+                    <h3><span>✓</span> יתרונות המיזם</h3>
+                    <ul>
+                        <li>מפתח אוריינות רגשית מגיל צעיר</li>
+                        <li>נותן כלים לזיהוי והבעת רגשות</li>
+                        <li>מסייע בוויסות עצמי</li>
+                        <li>כלי ויזואלי ומוחשי שמתאים לילדים</li>
+                        <li>ניתן לשימוש אישי וקבוצתי</li>
+                    </ul>
+                </div>
+                <div class="info-section challenges">
+                    <h3><span>!</span> אתגרים</h3>
+                    <ul>
+                        <li>דורש הנחיה נכונה למניעת שימוש לא מותאם</li>
+                        <li>ילדים מסוימים מתקשים לזהות רגשות</li>
+                        <li>צורך בהתאמה לגילאים שונים</li>
+                        <li>שמירה על הקופסה במצב טוב לאורך זמן</li>
+                    </ul>
+                </div>
+                <div class="info-section recommendations">
+                    <h3><span>→</span> המלצות לשיפור</h3>
+                    <ul>
+                        <li>פיתוח גרסה דיגיטלית/אפליקציה</li>
+                        <li>הוספת כרטיסיות עם אסטרטגיות התמודדות</li>
+                        <li>יצירת מדריך להורים לשימוש בבית</li>
+                        <li>שילוב "יומן רגשות" למעקב אישי</li>
+                        <li>הוספת סיפורים ודמויות שמדגימות רגשות</li>
+                    </ul>
+                </div>
+                <div class="modal-files">
+                    <h4>קבצי המיזם</h4>
+                    <a href="מצגות דמו דיי רמת השרון/קופסת הרגשות שלי.pptx" class="file-link" target="_blank">
+                        <div class="file-icon pptx">PPT</div>
+                        <span>מצגת קופסת הרגשות</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal-overlay" id="project8-modal">
+        <div class="modal">
+            <button class="modal-close" onclick="closeModal('project8')">✕</button>
+            <div class="modal-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                <h2>דחייה חברתית - הדר, רעות ורוני</h2>
+                <p>סרטונים על התמודדות עם דחייה חברתית</p>
+            </div>
+            <div class="modal-body">
+                <div class="info-section benefits">
+                    <h3><span>✓</span> יתרונות המיזם</h3>
+                    <ul>
+                        <li>סרטונים אותנטיים מנקודת מבט של תלמידים</li>
+                        <li>מעלה מודעות לתופעת הדחייה החברתית</li>
+                        <li>מציע פתרונות מעשיים</li>
+                        <li>פורמט וידאו מושך ונגיש לבני נוער</li>
+                        <li>מעודד דיון ושיחה בכיתה</li>
+                    </ul>
+                </div>
+                <div class="info-section challenges">
+                    <h3><span>!</span> אתגרים</h3>
+                    <ul>
+                        <li>רגישות הנושא דורשת הנחיה מקצועית</li>
+                        <li>סכנה לטריגר תלמידים שחוו דחייה</li>
+                        <li>צורך בהמשך טיפול לאחר הצפייה</li>
+                        <li>אורך הסרטון צריך להיות מותאם</li>
+                    </ul>
+                </div>
+                <div class="info-section recommendations">
+                    <h3><span>→</span> המלצות לשיפור</h3>
+                    <ul>
+                        <li>הוספת מדריך למורה עם שאלות לדיון</li>
+                        <li>יצירת סדרת סרטונים עם מקרים שונים</li>
+                        <li>שילוב עדויות של מבוגרים שהתמודדו בהצלחה</li>
+                        <li>הוספת משאבי עזרה בסוף כל סרטון</li>
+                        <li>פיתוח פעילות המשך לאחר הצפייה</li>
+                    </ul>
+                </div>
+                <div class="modal-files">
+                    <h4>קבצי המיזם</h4>
+                    <a href="מצגות דמו דיי רמת השרון/הדר רעות רוני דחייה חברתית.mp4" class="file-link" target="_blank">
+                        <div class="file-icon video">VID</div>
+                        <span>סרטון דחייה חברתית</span>
+                    </a>
+                    <a href="מצגות דמו דיי רמת השרון/הדר רעות רוני קודי.mp4" class="file-link" target="_blank">
+                        <div class="file-icon video">VID</div>
+                        <span>סרטון קודי</span>
+                    </a>
+                    <a href="מצגות דמו דיי רמת השרון/עמית ונירית.pptx" class="file-link" target="_blank">
+                        <div class="file-icon pptx">PPT</div>
+                        <span>מצגת עמית ונירית</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Navigation scroll effect
+        const navbar = document.getElementById('navbar');
+        let lastScroll = 0;
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('visible');
+            } else {
+                navbar.classList.remove('visible');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Modal functions
+        function openModal(projectId) {
+            const modal = document.getElementById(projectId + '-modal');
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal(projectId) {
+            const modal = document.getElementById(projectId + '-modal');
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        // Close modal on overlay click
+        document.querySelectorAll('.modal-overlay').forEach(overlay => {
+            overlay.addEventListener('click', (e) => {
+                if (e.target === overlay) {
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Close modal on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                document.querySelectorAll('.modal-overlay.active').forEach(modal => {
+                    modal.classList.remove('active');
+                });
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Animate elements on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.project-card, .charter-content');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight - 100;
+
+                if (isVisible) {
+                    el.style.opacity = '1';
+                    el.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Initialize animations
+        document.querySelectorAll('.project-card').forEach((card, index) => {
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(30px)';
+            card.style.transition = `all 0.6s ease ${index * 0.1}s`;
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+    </script>
+</body>
+</html>
